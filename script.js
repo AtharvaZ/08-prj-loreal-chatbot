@@ -3,7 +3,7 @@
    ============================================= */
 
 // Replace with your deployed Cloudflare Worker URL
-const WORKER_URL = "https://08-prj-loreal-chatbot.atharvazaveri4.workers.dev/";
+const WORKER_URL = "https://loreal-chatbot.atharvazaveri4.workers.dev/";
 
 /* —— DOM refs —— */
 const chatForm = document.getElementById("chatForm");
