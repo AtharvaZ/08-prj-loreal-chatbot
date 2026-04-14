@@ -3,14 +3,14 @@
    ============================================= */
 
 // Replace with your deployed Cloudflare Worker URL
-const WORKER_URL = "https://loreal-chatbot.atharvazaveri.workers.dev";
+const WORKER_URL = "https://08-prj-loreal-chatbot.atharvazaveri4.workers.dev/";
 
 /* —— DOM refs —— */
-const chatForm       = document.getElementById("chatForm");
-const userInput      = document.getElementById("userInput");
-const chatWindow     = document.getElementById("chatWindow");
+const chatForm = document.getElementById("chatForm");
+const userInput = document.getElementById("userInput");
+const chatWindow = document.getElementById("chatWindow");
 const latestQuestion = document.getElementById("latestQuestion");
-const sendBtn        = document.getElementById("sendBtn");
+const sendBtn = document.getElementById("sendBtn");
 
 /* —— Conversation history (multi-turn context) —— */
 const conversationHistory = [
@@ -29,8 +29,8 @@ IMPORTANT RULES:
 2. If asked about anything unrelated (e.g., politics, coding, sports, news), respond warmly but firmly: "I specialize in L'Oréal beauty and skincare topics. I'd love to help you with product recommendations, routines, or beauty tips instead — what can I assist you with?"
 3. Remember details the user shares (name, skin type, hair type, concerns, preferences) and reference them naturally in follow-up responses.
 4. Keep responses concise, friendly, and encouraging. Use L'Oréal's empowering tone.
-5. Recommend specific L'Oréal product lines when relevant (e.g., Revitalift, EverPure, True Match, Infallible).`
-  }
+5. Recommend specific L'Oréal product lines when relevant (e.g., Revitalift, EverPure, True Match, Infallible).`,
+  },
 ];
 
 /* —— Helper: append a message bubble —— */
@@ -85,11 +85,12 @@ function addTypingIndicator() {
 
 /* —— Helper: toggle loading state —— */
 function setLoading(loading) {
-  sendBtn.disabled  = loading;
+  sendBtn.disabled = loading;
   userInput.disabled = loading;
 
   if (loading) {
-    sendBtn.innerHTML = '<span class="material-icons spinning" aria-hidden="true">autorenew</span>';
+    sendBtn.innerHTML =
+      '<span class="material-icons spinning" aria-hidden="true">autorenew</span>';
   } else {
     sendBtn.innerHTML =
       '<span class="material-icons" aria-hidden="true">send</span>' +
@@ -125,14 +126,14 @@ chatForm.addEventListener("submit", async (e) => {
     const response = await fetch(WORKER_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages: conversationHistory })
+      body: JSON.stringify({ messages: conversationHistory }),
     });
 
     if (!response.ok) {
       throw new Error(`Server error: ${response.status}`);
     }
 
-    const data  = await response.json();
+    const data = await response.json();
     const reply = data.choices[0].message.content;
 
     // Remove typing indicator
@@ -143,12 +144,11 @@ chatForm.addEventListener("submit", async (e) => {
 
     // Render AI bubble
     appendMessage("assistant", reply);
-
   } catch (err) {
     typingEl.remove();
     appendMessage(
       "assistant",
-      "I'm sorry, I'm having a little trouble connecting right now. Please try again in a moment!"
+      "I'm sorry, I'm having a little trouble connecting right now. Please try again in a moment!",
     );
     console.error("Chat error:", err);
   } finally {
