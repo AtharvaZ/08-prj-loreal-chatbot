@@ -134,6 +134,12 @@ chatForm.addEventListener("submit", async (e) => {
     }
 
     const data = await response.json();
+    console.log("Worker response:", JSON.stringify(data));
+
+    if (!data.choices || !data.choices[0]) {
+      throw new Error(data.error?.message || JSON.stringify(data));
+    }
+
     const reply = data.choices[0].message.content;
 
     // Remove typing indicator
