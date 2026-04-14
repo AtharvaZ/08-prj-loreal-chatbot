@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat Assistant</title>
+    <title>L'Oréal Smart Beauty Advisor</title>
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Playfair+Display:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
@@ -19,39 +19,79 @@
     <div class="page-wrapper">
       <!------- Header / Branding ------->
       <header class="site-header">
-        <h1 class="site-title">Smart Product Advisor</h1>
+        <div class="header-inner">
+          <img
+            src="img/loreal-logo.png"
+            alt="L'Oréal Paris"
+            class="site-logo"
+          />
+          <div class="header-text">
+            <h1 class="site-title">Smart Beauty Advisor</h1>
+            <p class="site-subtitle">
+              Your personal guide to L'Oréal products &amp; routines
+            </p>
+          </div>
+        </div>
+        <div class="header-divider"></div>
       </header>
 
       <!------- Chat Area ------->
       <main>
-        <section class="chatbox">
-          <div id="chatWindow" class="chat-window">
-            <!-- messages will be appended here via JS -->
+        <section class="chatbox" aria-label="Beauty advisor chat">
+          <!-- Latest question display -->
+          <div
+            id="latestQuestion"
+            class="latest-question"
+            aria-live="polite"
+            aria-label="Your latest question"
+          ></div>
+
+          <!-- Conversation window -->
+          <div
+            id="chatWindow"
+            class="chat-window"
+            role="log"
+            aria-live="polite"
+            aria-label="Chat conversation"
+          >
+            <div class="msg ai">
+              <div class="avatar ai-avatar">
+                <span class="material-icons">auto_awesome</span>
+              </div>
+              <div class="bubble">
+                Hello! I'm your L'Oréal Beauty Advisor. I can help you discover
+                the perfect skincare routine, find the right makeup products,
+                explore haircare solutions, and much more. What beauty question
+                can I answer for you today?
+              </div>
+            </div>
           </div>
 
+          <!-- Input form -->
           <form id="chatForm" class="chat-form">
-            <label for="userInput" class="visually-hidden">Message</label>
+            <label for="userInput" class="visually-hidden">
+              Ask a beauty question
+            </label>
             <input
               id="userInput"
               name="userInput"
               type="text"
-              placeholder="Ask me about products or routines…"
+              placeholder="Ask about products, routines, recommendations…"
               autocomplete="off"
               required
             />
-            <button type="submit" id="sendBtn">
-              <span class="material-icons">send</span>
+            <button type="submit" id="sendBtn" aria-label="Send message">
+              <span class="material-icons" aria-hidden="true">send</span>
               <span class="visually-hidden">Send</span>
             </button>
           </form>
         </section>
       </main>
 
-      <!------- Footer Links ------->
+      <!------- Footer ------->
       <footer class="site-footer">
-        <p>&copy; 2025 Company Name. All rights reserved.</p>
-        <nav>
-          <!-- These URLs are placeholders -->
+        <p>&copy; 2025 L'Oréal Paris. All rights reserved.</p>
+        <nav aria-label="Footer navigation">
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Use</a>
           <a href="#">Contact</a>
@@ -59,7 +99,6 @@
       </footer>
     </div>
 
-    <!-- secrets.js can be removed when using Cloudflare Workers for API requests -->
     <script src="secrets.js"></script>
     <script src="script.js"></script>
   </body>
